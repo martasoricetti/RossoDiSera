@@ -9,9 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./weather_project
     strategy:
       max-parallel: 4
       matrix:
@@ -30,3 +27,4 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+      working-directory: ./weather_project
