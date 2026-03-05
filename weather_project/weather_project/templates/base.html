@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+    <script src="https://kit.fontawesome.com/7696ec3b18.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- header -->
+    {% block core_header %}
+    <div class="text-sm text-white w-full">
+       <nav class="relative h-[70px] flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 bg-white text-gray-900 transition-all shadow">
+
+           <div class="flex items-center gap-2">
+                <svg height="50" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M885.76 921.28h-106.56l-0.32-26.77333333c0.10666667-0.74666667-0.10666667-68.26666667-7.46666667-171.52-8.96-125.65333333-21.76-243.41333333-167.57333333-334.82666667l24.53333333-26.02666667c78.72 46.93333333 146.24 112 178.88 167.36 42.34666667 72 56.85333333 110.29333333 69.54666667 176.85333334 21.65333333 112.64 9.49333333 211.30666667 8.96 214.93333333z" fill="#755E49"></path><path d="M565.65333333 893.40444445c0 14.93333333-1.38666667 29.44-4.05333333 43.52H129.28c-2.66666667-14.08-4.05333333-28.69333333-4.05333333-43.52 0-25.81333333 4.26666667-50.66666667 11.94666666-73.81333334 29.76-88.64 111.78666667-152.32 208.21333334-152.32 96.42666667 0 178.45333333 63.68 208.21333333 152.32 7.89333333 23.14666667 12.05333333 48 12.05333333 73.81333334z" fill="#FF9D00"></path><path d="M989.12 926.61333333c0 16.21333333-6.61333333 30.82666667-17.17333333 41.49333334-10.56 10.66666667-25.28 17.17333333-41.49333334 17.17333333h-838.4c-32.42666667 0-58.66666667-26.24-58.66666666-58.66666667 0-16.21333333 6.61333333-30.82666667 17.17333333-41.49333333 10.66666667-10.56 25.28-17.17333333 41.49333333-17.17333333h838.4c32.42666667 0 58.66666667 26.24 58.66666667 58.66666666z" fill="#00B7FF"></path><path d="M981.86666667 399.57333333c10.45333333 0 14.50666667-17.17333333 5.86666666-24.42666666-31.14666667-26.24-91.73333333-64.21333333-181.01333333-64.74666667-89.92-0.64-150.29333333 38.50666667-180.90666667 65.28-8.53333333 7.46666667-4.37333333 24.32 5.97333334 24.32l350.08-0.42666667z" fill="#02C652"></path><path d="M882.77333333 158.61333333c7.36-7.36-1.81333333-22.4-13.12-21.44-40.64 3.52-110.29333333 19.52-173.76 82.24-64 63.14666667-79.04 133.44-81.81333333 174.08-0.74666667 11.30666667 14.08 20.37333333 21.44 13.01333334l247.25333333-247.89333334z" fill="#02C652"></path><path d="M648 391.89333333c7.36-7.36-1.81333333-22.4-13.12-21.44-40.64 3.52-110.29333333 19.52-173.76 82.24-64 63.14666667-79.04 133.44-81.81333333 174.08-0.74666667 11.30666667 14.08 20.37333333 21.44 13.01333334l247.25333333-247.89333334z" fill="#02C652"></path><path d="M657.92 44.69333333c0-10.45333333-17.17333333-14.50666667-24.42666667-5.86666666-26.24 31.14666667-64.21333333 91.73333333-64.74666666 181.01333333-0.64 89.92 38.50666667 150.29333333 65.28 180.90666667 7.46666667 8.53333333 24.32 4.37333333 24.32-5.97333334l-0.42666667-350.08z" fill="#02C652"></path><path d="M657.92 372.58666667c0-10.45333333-17.17333333-14.50666667-24.42666667-5.86666667-26.24 31.14666667-64.21333333 91.73333333-64.74666666 181.01333333-0.64 89.92 38.50666667 150.29333333 65.28 180.90666667 7.46666667 8.53333333 24.32 4.37333333 24.32-5.97333333l-0.42666667-350.08z" fill="#02C652"></path><path d="M642.66666667 402.24c10.45333333 0 14.50666667-17.17333333 5.86666666-24.42666667-31.14666667-26.24-91.73333333-64.21333333-181.01333333-64.74666666-89.92-0.64-150.29333333 38.50666667-180.90666667 65.28-8.53333333 7.46666667-4.37333333 24.32 5.97333334 24.32l350.08-0.42666667z" fill="#02C652"></path></g></svg>
+                <h1 class="text-2xl font-bold text-red-600">RossoDiSera</h1>
+           </div>
+
+           <ul class="hidden md:flex items-center space-x-8 sm:pl-12">
+               <li><a href="{% url 'weather_app:index' %}">Home</a></li>
+               <li><a href="{% url 'weather_app:dashboard' %}">Dashboard</a></li>
+           </ul>
+
+           <a href="{% url 'login' %}"><button class="md:inline hidden bg-white hover:bg-gray-50 border border-gray-300 ml-20 px-9 py-2 rounded-full active:scale-95 transition-all">Account <i class="fa-solid fa-user"></i></button></a>
+
+           <button aria-label="menu-btn" type="button" class="menu-btn inline-block md:hidden active:scale-90 transition">
+               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                   <path d="M3 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2zm0 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2zm0 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2z"/>
+               </svg>
+           </button>
+
+           <div class="mobile-menu absolute top-[70px] left-0 w-full bg-white shadow-sm p-6 hidden md:hidden">
+               <ul class="flex flex-col space-y-4 text-lg">
+                   <li><a href="{% url 'weather_app:index' %}">Home</a></li>
+                   <li><a href="{% url 'weather_app:dashboard' %}">Dashboard</a></li>
+               </ul>
+
+              <a href="{% url 'login' %}"><button type="button" class="bg-white text-gray-600 border border-gray-300 mt-6 text-sm hover:bg-gray-50 active:scale-95 transition-all w-40 h-11 rounded-full">
+                   Log In
+              </button></a>
+           </div>
+       </nav>
+    </div>
+    {% endblock core_header %}
+
+    <!-- body -->
+    {% block core_body %}
+    {% endblock core_body %}
+
+    <!-- footer -->
+    {% block core_footer %}
+    {% endblock core_footer %}
+
+</body>
+<script>
+   const menuButtons = document.querySelectorAll('.menu-btn');
+   const mobileMenus = document.querySelectorAll('.mobile-menu');
+
+   menuButtons.forEach((btn, index) => {
+       btn.addEventListener('click', () => {
+           mobileMenus[index].classList.toggle('hidden');
+       });
+   });
+
+</script>
+</html>
+

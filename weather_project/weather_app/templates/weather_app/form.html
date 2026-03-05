@@ -1,0 +1,27 @@
+{% block form %}
+<form method="post" class="space-y-6">
+    {% csrf_token %}
+
+    <!-- stili nel widget -->
+    <div>
+        {{ form.name.label_tag }}
+        {{ form.name }}
+    </div>
+
+    <div>
+        {{ form.country_code.label_tag }}
+        {{ form.country_code }}
+    </div>
+
+
+    <button type="submit" class="w-full bg-blue-600 text-white py-4 px-6 rounded-xl font-semibold shadow-xl hover:bg-blue-700">
+        {{ button_text|default:"Invia" }}
+    </button>
+
+    {% if form.non_field_errors %}
+      <div class="mt-2 mb-4 text-sm text-red-600 bg-white">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+</form>
+{% endblock form %}

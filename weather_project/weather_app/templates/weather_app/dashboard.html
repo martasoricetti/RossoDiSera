@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}RossoDiSera{% endblock %}
+
+{% block core_body %}
+{% load static %}
+
+<section class="relative bg-cover bg-center bg-no-repeat min-h-[20rem] flex items-center justify-center py-12"
+style="--bg-url: url('{% static 'images/weather_background.jpeg' %}'); background-image: var(--bg-url);">
+
+  <div class="absolute inset-0 bg-black/50"></div>
+
+  <div class="relative z-10 w-full max-w-sm min-w-[200px] mx-auto">
+      {% include "weather_app/form.html" with form=form button_text="Aggiungi città ai tuoi preferiti"%}
+  </div>
+</section>
+
+<!-- Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
+  {% for weather in all_weather_data %}
+  <div class="max-w-md mx-auto bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl shadow-2xl p-6 backdrop-blur-sm bg-white/20 text-white relative">
+    <!-- Delete record -->
+    <form method="post" action="{% url 'weather_app:remove_favorite' weather.city_id %}">
+      {% csrf_token %}
+      <button type="submit" class="absolute top-0 right-0 p-2">
+        <i class="fa-solid fa-xmark text-red-500 bg-white rounded-sm"></i>
+      </button>
+    </form>
+
+    <!-- City header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <p class="text-blue-100">{{weather.time}}</p>
+        <h2 class="text-3xl font-bold">{{weather.city}}</h2>
+        <h3 class="text-xl">{{weather.country}}, {{weather.country_code}}</h3>
+        <p class="text-blue-100">{{weather.description}}</p>
+      </div>
+      <div class="text-6xl"><i class="fa-solid fa-{{ weather.icon }}"></i></div>
+    </div>
+
+    <!-- Current temp -->
+    <div class="text-center mb-8">
+      <p class="text-5xl font-black">{{weather.temperature}} {{weather.units.temperature}}</p>
+      <p class="text-xl text-blue-100">Feels like {{weather.feels_like_temp}} {{weather.units.temperature}}</p>
+    </div>
+
+    <!-- Forecast grid -->
+    <!--<div class="grid grid-cols-3 gap-4 mb-6">
+      <div class="text-center p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+        <p class="text-2xl">🌤️</p>
+        <p class="font-semibold">25°</p>
+        <p class="text-sm opacity-90">13:00</p>
+      </div>
+      <div class="text-center p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+        <p class="text-2xl">☀️</p>
+        <p class="font-semibold">27°</p>
+        <p class="text-sm opacity-90">14:00</p>
+      </div>
+      <div class="text-center p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+        <p class="text-2xl">🌤️</p>
+        <p class="font-semibold">26°</p>
+        <p class="text-sm opacity-90">15:00</p>
+      </div>
+    </div>-->
+
+    <!-- Stats row -->
+    <div class="grid grid-cols-3 gap-4 text-sm">
+      <div class="text-center p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+        <p class="font-semibold">Humidity</p>
+        <p>{{weather.humidity}} {{weather.units.humidity}}</p>
+      </div>
+      <div class="text-center p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+        <p class="font-semibold">Wind</p>
+        <p>{{weather.wind_speed}} {{weather.units.wind_speed}}</p>
+      </div>
+      <div class="text-center p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+        <p class="font-semibold">UV max</p>
+        <p>{{weather.uv}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock core_body %}
